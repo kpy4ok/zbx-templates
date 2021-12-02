@@ -52,7 +52,8 @@ ipmi_proliant.pl
 
 Для практического применения вышеописанной конструкции необходимо:
 
-Скачать архив со скриптами и шаблоном, импортировать шаблон в Zabbix,
+Скачать архив ( https://www.zabbix.com/forum/attachment.php?attachmentid=6874&d=1397131920 )
+со скриптами и шаблоном, импортировать шаблон в Zabbix,
 Положить скрипты ilo_discovery.pl и ipmi_proliant.pl в папку, указанную в качестве хранилища ExternalScripts в конфиге Zabbix, и сделать их исполняемыми,
 Скачать и установить FreeIPMI (FAQ по сборке и зависимостям лежит тут):
 # wget http://ftp.gnu.org/gnu/freeipmi/freeipmi-1.2.1.tar.gz 
