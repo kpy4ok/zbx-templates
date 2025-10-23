@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2025-10-23T14:00:00Z</date>
+    <date>2025-10-23T15:00:00Z</date>
     <groups>
         <group>
             <name>Templates/Web</name>
@@ -17,6 +17,8 @@
                     <name>Templates/Web</name>
                 </group>
             </groups>
+
+            <!-- Элементы -->
             <items>
                 <item>
                     <name>PHP-FPM active processes</name>
@@ -54,20 +56,22 @@
                     <description>Текущее количество запросов в очереди PHP-FPM</description>
                 </item>
             </items>
-            <triggers>
-                <trigger>
-                    <name>PHP-FPM достиг максимума процессов</name>
-                    <expression>{Template PHP-FPM status (agent):phpfpm.status[max children reached].last()}>0</expression>
-                    <priority>3</priority>
-                    <description>Пул PHP-FPM достиг pm.max_children — возможна недоступность сайта</description>
-                </trigger>
-                <trigger>
-                    <name>Очередь PHP-FPM больше 0</name>
-                    <expression>{Template PHP-FPM status (agent):phpfpm.status[listen queue].last()}>0</expression>
-                    <priority>2</priority>
-                    <description>Есть запросы в очереди PHP-FPM — не хватает рабочих процессов</description>
-                </trigger>
-            </triggers>
+
+            <!-- Триггеры -->
+            <trigger>
+                <name>PHP-FPM достиг максимума процессов</name>
+                <expression>{Template PHP-FPM status (agent):phpfpm.status[max children reached].last()}>0</expression>
+                <priority>3</priority>
+                <description>Пул PHP-FPM достиг pm.max_children — возможна недоступность сайта</description>
+            </trigger>
+
+            <trigger>
+                <name>Очередь PHP-FPM больше 0</name>
+                <expression>{Template PHP-FPM status (agent):phpfpm.status[listen queue].last()}>0</expression>
+                <priority>2</priority>
+                <description>Есть запросы в очереди PHP-FPM — не хватает рабочих процессов</description>
+            </trigger>
+
         </template>
     </templates>
 </zabbix_export>
