@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>6.0</version>
+    <date>2025-10-15T12:00:00Z</date>
+    <groups>
+        <group>
+            <name>Templates/Web</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template PHP-FPM status (agent)</template>
+            <name>Template PHP-FPM status (agent)</name>
+            <description>Мониторинг PHP-FPM через /status с помощью zabbix_agentd + curl</description>
+            <groups>
+                <group>
+                    <name>Templates/Web</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <name>PHP-FPM active processes</name>
+                    <key>phpfpm.status[active processes]</key>
+                    <type>ZABBIX_AGENT</type>
+                    <value_type>NUMERIC_UNSIGNED</value_type>
+                    <delay>60s</delay>
+                    <units>proc</units>
+                    <description>Активные процессы PHP-FPM</description>
+                </item>
+                <item>
+                    <name>PHP-FPM idle processes</name>
+                    <key>phpfpm.status[idle processes]</key>
+                    <type>ZABBIX_AGENT</type>
+                    <value_type>NUMERIC_UNSIGNED</value_type>
+                    <delay>60s</delay>
+                    <units>proc</units>
+                    <description>Простаивающие процессы PHP-FPM</description>
+                </item>
+                <item>
+                    <name>PHP-FPM max children reached</name>
+                    <key>phpfpm.status[max children reached]</key>
+                    <type>ZABBIX_AGENT</type>
+                    <value_type>NUMERIC_UNSIGNED</value_type>
+                    <delay>60s</delay>
+                    <description>Количество случаев, когда достигнут лимит pm.max_children</description>
+                </item>
+                <item>
+                    <name>PHP-FPM listen queue</name>
+                    <key>phpfpm.status[listen queue]</key>
+                    <type>ZABBIX_AGENT</type>
+                    <value_type>NUMERIC_UNSIGNED</value_type>
+                    <delay>60s</delay>
+                    <units>req</units>
+                    <description>Текущее количество запросов в очереди PHP-FPM</description>
+                </item>
+            </items>
+            <triggers>
+                <trigger>
+                    <name>PHP-FPM достиг максимума процессов</name>
+                    <expression>{Template PHP-FPM status (agent):phpfpm.status[max children reached].last()}>0</expression>
+                    <priority>WARNING</priority>
+                    <description>Пул PHP-FPM достиг pm.max_children — возможна недоступность сайта</description>
+                </trigger>
+                <trigger>
+                    <name>Очередь PHP-FPM больше 0</name>
+                    <expression>{Template PHP-FPM status (agent):phpfpm.status[listen queue].last()}>0</expression>
+                    <priority>AVERAGE</priority>
+                    <description>Есть запросы в очереди PHP-FPM — не хватает рабочих процессов</description>
+                </trigger>
+            </triggers>
+            <graphs>
+                <graph>
+                    <name>PHP-FPM processes</name>
+                    <width>600</width>
+                    <height>200</height>
+                    <gitems>
+                        <gitem>
+                            <drawtype>LINE</drawtype>
+                            <color>1A7C11</color>
+                            <item>
+                                <host>Template PHP-FPM status (agent)</host>
+                                <key>phpfpm.status[active processes]</key>
+                            </item>
+                        </gitem>
+                        <gitem>
+                            <drawtype>LINE</drawtype>
+                            <color>F63100</color>
+                            <item>
+                                <host>Template PHP-FPM status (agent)</host>
+                                <key>phpfpm.status[idle processes]</key>
+                            </item>
+                        </gitem>
+                    </gitems>
+                </graph>
+            </graphs>
+        </template>
+    </templates>
+</zabbix_export>
