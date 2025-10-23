@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>5.0</version>
-    <date>2025-10-23T12:00:00Z</date>
+    <date>2025-10-23T14:00:00Z</date>
     <groups>
         <group>
             <name>Templates/Web</name>
@@ -21,7 +21,7 @@
                 <item>
                     <name>PHP-FPM active processes</name>
                     <key>phpfpm.status[active processes]</key>
-                    <type>ZABBIX_AGENT</type>
+                    <type>0</type>
                     <value_type>3</value_type>
                     <delay>60s</delay>
                     <units>proc</units>
@@ -30,7 +30,7 @@
                 <item>
                     <name>PHP-FPM idle processes</name>
                     <key>phpfpm.status[idle processes]</key>
-                    <type>ZABBIX_AGENT</type>
+                    <type>0</type>
                     <value_type>3</value_type>
                     <delay>60s</delay>
                     <units>proc</units>
@@ -39,7 +39,7 @@
                 <item>
                     <name>PHP-FPM max children reached</name>
                     <key>phpfpm.status[max children reached]</key>
-                    <type>ZABBIX_AGENT</type>
+                    <type>0</type>
                     <value_type>3</value_type>
                     <delay>60s</delay>
                     <description>Количество случаев, когда достигнут лимит pm.max_children</description>
@@ -47,7 +47,7 @@
                 <item>
                     <name>PHP-FPM listen queue</name>
                     <key>phpfpm.status[listen queue]</key>
-                    <type>ZABBIX_AGENT</type>
+                    <type>0</type>
                     <value_type>3</value_type>
                     <delay>60s</delay>
                     <units>req</units>
